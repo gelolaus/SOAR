@@ -13,6 +13,7 @@ def generate_qr_codes_from_csv(csv_file_path):
                 border=4,
             )
 
+
             data = f"FROSH NIGHT 2024\n" \
                    f"id: {row['id']}\n" \
                    f"attendee_name: {row['attendee_name']}\n" \
@@ -27,5 +28,5 @@ def generate_qr_codes_from_csv(csv_file_path):
             img = qr.make_image(fill_color="black", back_color="white")
             img.save(f"{row['id']}_{row['attendee_name']}.png")
 
-csv_file_path = '11111.csv'
+csv_file_path = 'FroshNight2024Registration.csv'
 generate_qr_codes_from_csv(csv_file_path)

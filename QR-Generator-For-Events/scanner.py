@@ -61,7 +61,7 @@ def index():
             current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             # Read the registration CSV file
-            with open('11111.csv', 'r', newline='') as csvfile:
+            with open('FroshNight2024Registration.csv', 'r', newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 rows = list(reader)  # Read all rows into a list
 
@@ -88,15 +88,15 @@ def index():
                     matching_row['time'] = current_time
 
                     # Write the updated data back to the registration CSV file
-                    with open('11111.csv', 'w', newline='') as csvfile:
+                    with open('FroshNight2024Registration.csv', 'w', newline='') as csvfile:
                         fieldnames = ['id', 'attendee_name', 'id_number', 'email_address', 'school', 'block', 'status', 'time']
                         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                         writer.writeheader()
                         writer.writerows(rows)
 
-                    # Append the confirmed data to 22222.csv
-                    file_exists = os.path.isfile('22222.csv')
-                    with open('22222.csv', 'a', newline='') as confirmed_csvfile:
+                    # Append the confirmed data to FroshNight2024Confirmed.csv
+                    file_exists = os.path.isfile('FroshNight2024Confirmed.csv')
+                    with open('FroshNight2024Confirmed.csv', 'a', newline='') as confirmed_csvfile:
                         fieldnames = ['id', 'attendee_name', 'id_number', 'email_address', 'school', 'block', 'status', 'time']
                         writer = csv.DictWriter(confirmed_csvfile, fieldnames=fieldnames)
 
