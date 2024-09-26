@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>QR Code Scanner</title>
+        <script src=".\static\js\html5-qrcode.min.js"></script> 
+    </head>
+    <body>
+        <h1>Scan QR Code</h1>
+    
+        <div id="reader" style="width:500px;height:400px;"></div>
+    
+        <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'qr_code_data': decodedText  // Send the plain text content
+                    })
+                })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message); 
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while processing the QR code.');
+                });
+    
+                // Optional: Stop scanning after a successful scan
+                // html5QrcodeScanner.clear();  
+            }
+    
+            function onScanFailure(error) {
+                // Handle scan failure (optional)
+                console.warn(`QR code scan error: ${error}`);
+            }
+    
+            let html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", { fps: 10, qrbox: 250 });
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        </script>
+    
+    </body>
+    </html>
